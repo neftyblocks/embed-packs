@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playground Packs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body style="background-color: #1a1a1a;color:#fcfcfd;">
+    <h1>Playground</h1>
+    <p>test your embed packs here</p>
+
+    <header>
+        <div>
+            <button id="wallet-login">Login with Anchor</button>
+            <button id="wallet-logout" class="hidden"></button>
+        </div>
+        <form id="neftyblocks-form">
+            <div>
+                <label for="">collection</label>
+                <input type="text" id="neftyblocks-collection" value="alpacaworlds" placeholder="Collection"
+                    name="neftyblocks-collection" />
+            </div>
+            <input type="submit" value="Update" />
+        </form>
+    </header>
+
+    <div id="neftyblocks-packs"></div>
+
+    <script type="module" src="src/main.ts"></script>
+</body>
+
+</html>

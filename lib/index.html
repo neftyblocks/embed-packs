@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>embed packs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --nefty-font-family: 'DM Sans', sans-serif;
+        }
+
+        body {
+            display: block;
+            box-sizing: border-box;
+            min-height: 100vh;
+            height: 100%;
+            padding: 20px;
+            margin: 0;
+            background-color: #1a1a1a;
+        }
+
+        .actions {
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="actions">
+        <button id="login">login</button>
+        <button id="logout">logout</button>
+        <button id="switch">switch collection</button>
+    </div>
+    <div id="neftyblocks-packs"></div>
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module">
+        const mount = document.querySelector("#neftyblocks-packs");
+        const login = document.querySelector('#login');
+        const logout = document.querySelector('#logout');
+        const switchEl = document.querySelector('#switch');
+        // ----------------------------
+        // CONFIG   
+        // ----------------------------
+        const { VITE_COLLECTION_NAME, VITE_ACCOUNT_NAME, VITE_ATOMIC_URL, VITE_CHAIN_URL, VITE_TEST_TX } = import.meta.env;
+
+        const config = {
+            atomic_url: VITE_ATOMIC_URL,
+            chain_url: VITE_CHAIN_URL,
+            chain: 'wax',
+            collection: VITE_COLLECTION_NAME,
+            marketplace_url: "https://test.neftyblocks.com/marketplace/listing",
+            profile_url: "https://test.neftyblocks.com/profile/",
+            query: {
+                search: "",
+                page: "1",
+                category: "",
+            }
+        }
+
+
+        const account = {
+            actor: VITE_ACCOUNT_NAME,
+            permission: 'active'
+        }
+
+        // ----------------------------
+        // MOUNT Component
+        // ----------------------------
+        const embed = `<neftyblocks-packs 
+                        config=${JSON.stringify(config)}
+                        account=${JSON.stringify(account)}
+                    />`;
+
+        mount.innerHTML = embed;
+
+        const component = document.querySelector("neftyblocks-packs");
+        // ----------------------------
+        // EVENTS from Component
+        // ----------------------------
+
+        component.addEventListener("sign", ({ detail }) => {
+            console.log("sign", detail);
+
+            setTimeout(() => {
+                component.setAttribute("transactionid", VITE_TEST_TX);
+                // component.setAttribute("transactionid", 'unset');
+            }, 1000);
+        });
+
+        component.addEventListener("pack", ({ detail }) => {
+            console.log("pack", detail)
+        });
+
+        let toggle = true;
+
+        switchEl.addEventListener('click', () => {
+            component.setAttribute("config", JSON.stringify({
+                ...config,
+                collection: toggle ? 'alpacaworlds' : VITE_COLLECTION_NAME
+            }));
+
+            toggle = !toggle;
+        });
+
+        component.addEventListener("query", ({ detail }) => {
+            console.log("query", detail)
+        });
+
+
+        // ----------------------------
+        // LOGIN
+        // ----------------------------
+
+        login.addEventListener('click', () => {
+            component.setAttribute("account", JSON.stringify(account));
+        });
+
+        logout.addEventListener('click', () => {
+            component.setAttribute("account", null);
+        });
+    </script>
+</body>
+
+</html>

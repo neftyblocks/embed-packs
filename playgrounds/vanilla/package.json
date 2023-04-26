@@ -1,0 +1,14 @@
+{
+    "name": "playground",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev:play": "vite",
+        "build:play": "tsc && vite build",
+        "preview:play": "vite preview"
+    },
+    "dependencies": {
+        "@neftyblocks/packs": "workspace:*"
+    }
+}

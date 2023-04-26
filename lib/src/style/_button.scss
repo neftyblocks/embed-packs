@@ -1,0 +1,62 @@
+.btn-clear {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: var(--nb-radius);
+    border: var(--nb-border-size) solid var(--nb-border);
+    background-color: var(--nb-bg-card);
+    color: var(--nb-color);
+    font-size: var(--nb-font-size--small);
+    font-weight: 900;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+        background-color: var(--nb-button-hover);
+    }
+
+    &[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &--primary {
+        font-weight: 500;
+        padding: 16px 28px;
+    }
+}
+
+@keyframes highlight {
+    0%,
+    100% {
+        background-color: var(--nb-bg-card);
+    }
+    20% {
+        background-color: var(--nb-highlight);
+    }
+    50% {
+        background-color: var(--nb-bg-card);
+    }
+}
+
+@keyframes shine {
+    0% {
+        transform: skewY(-30deg) translate3d(0, -100%, 0);
+    }
+    20% {
+        transform: skewY(-30deg) translate3d(0, 500%, 0);
+    }
+
+    100% {
+        transform: skewY(-30deg) translate3d(0, 500%, 0);
+    }
+}
