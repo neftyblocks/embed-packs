@@ -56,11 +56,6 @@
             collection: VITE_COLLECTION_NAME,
             marketplace_url: "https://test.neftyblocks.com/marketplace/listing",
             profile_url: "https://test.neftyblocks.com/profile/",
-            query: {
-                search: "",
-                page: "1",
-                category: "",
-            }
         }
 
 
@@ -68,6 +63,8 @@
             actor: VITE_ACCOUNT_NAME,
             permission: 'active'
         }
+
+        const pack = {}
 
         // ----------------------------
         // MOUNT Component
@@ -91,10 +88,6 @@
                 component.setAttribute("transactionid", VITE_TEST_TX);
                 // component.setAttribute("transactionid", 'unset');
             }, 1000);
-        });
-
-        component.addEventListener("pack", ({ detail }) => {
-            console.log("pack", detail)
         });
 
         let toggle = true;

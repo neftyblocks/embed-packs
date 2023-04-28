@@ -5,7 +5,7 @@
     import { onMount } from 'svelte/internal';
 
     // COMPONENTS
-
+    import './components/Packs.svelte';
     // GLOBALS
 
     // STATES
@@ -59,4 +59,6 @@
     }
 </script>
 
-<main />
+<main>
+    <nefty-packs-group />
+</main>
