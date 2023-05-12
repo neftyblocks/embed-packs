@@ -19,20 +19,12 @@
     --nb-border-card: var(--nefty-border-card, #424652);
     --nb-border-size: var(--nefty-border-size, 1px);
     --nb-bg: var(--nefty-bg, #1a1a1a);
-    --nb-bg-card: var(--nefty-bg-card, #23262f);
-    --nb-bg-selected: var(--nefty-bg-selected, #292b31);
-    --nb-bg-footer: var(--nefty-bg-footer, #292c36);
 
     --nb-shadow: var(--nefty-shadow, rgba(0, 0, 0, 0.5));
 
     --nb-color: var(--nefty-color, #fcfcfd);
     --nb-color-secondary: var(--nefty-color-secondary, #777e90);
     --nb-color-highlight: var(--nefty-color-highlight, #00ffff);
-
-    --nb-button: var(--nefty-button, #21b55a);
-    --nb-secure: var(--nefty-secure, #21abb5);
-
-    --nb-inactive: var(--nefty-inactive, rgba(182, 44, 44, 0.8));
 
     --nb-highlight: var(--nefty-highlight, #4050b5);
 
@@ -41,8 +33,6 @@
     --nb-rarity-rare: var(--nefty-rarity-rare, #4050b5);
     --nb-rarity-epic: var(--nefty-rarity-epic, #9c27b0);
     --nb-rarity-legendary: var(--nefty-rarity-legendary, #ffd500);
-
-    --nb-markdown-offset: var(--nefty-markdown-offset, 200px);
 
     color: var(--nb-color);
 }

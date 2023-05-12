@@ -32,8 +32,6 @@ export const getPacks = async ({ atomic_url, chain_url, collection, account }) =
     }
 
     if (data) {
-        console.log(data);
-
         for (let i = 0; i < data.rows.length; i++) {
             const { pack_template_id, display_data, unlock_time, use_count, pack_id, recipe_id } = data.rows[i];
 
@@ -46,8 +44,6 @@ export const getPacks = async ({ atomic_url, chain_url, collection, account }) =
                 use_count,
             };
 
-            console.log(pack_template_id);
-
             templateIds.push(pack_template_id);
         }
     }
@@ -55,7 +51,7 @@ export const getPacks = async ({ atomic_url, chain_url, collection, account }) =
     const { data: dataTemplates, error: errorTemplates } = await useFetch<Payload>('/atomicassets/v1/assets', {
         baseUrl: atomic_url,
         params: {
-            owner: account,
+            owner: account.actor,
             collection_name: collection,
             template_ids: templateIds.join(','),
         },
@@ -67,6 +63,20 @@ export const getPacks = async ({ atomic_url, chain_url, collection, account }) =
     }
 
     if (dataTemplates) {
-        console.log(dataTemplates);
+        for (let i = 0; i < dataTemplates.data.length; i++) {
+            const { template } = dataTemplates.data[i];
+
+            if (template?.template_id && tableData[template.template_id]) {
+                console.log(dataTemplates.data[i]);
+
+                tableData[template.template_id] = {
+                    ...tableData[template.template_id],
+                };
+            }
+        }
+
+        console.log(tableData);
     }
+
+    return null;
 };
