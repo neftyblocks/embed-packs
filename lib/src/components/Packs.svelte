@@ -36,6 +36,10 @@
             unsubscribe();
         };
     });
+
+    const viewPack = (pack) => {
+        console.log(pack);
+    };
 </script>
 
 <svg
@@ -98,7 +102,14 @@
 <main>
     {#if data}
         {#if data.length}
-            <div class="packs-group">test</div>
+            <div class="packs-group">
+                {#each data as pack}
+                    <button
+                        class={`btn-clear packs-item`}
+                        on:click={() => viewPack(pack)}
+                    />
+                {/each}
+            </div>
         {:else}
             <p class="error">
                 <svg role="presentation" focusable="false" aria-hidden="true">

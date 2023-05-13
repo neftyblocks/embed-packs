@@ -1,4 +1,4 @@
-import { useFetch } from '@nefty/use';
+import { useFetch, useAssetData, useImageUrl } from '@nefty/use';
 import type { Payload } from '../types';
 import { getNameAsHex } from '../utils';
 
@@ -7,6 +7,7 @@ export const getPacks = async ({ atomic_url, chain_url, collection, account }) =
 
     const tableData = {};
     const templateIds = [];
+    const result = [];
 
     const { data, error } = await useFetch<any>('/v1/chain/get_table_rows', {
         baseUrl: chain_url,
@@ -42,6 +43,11 @@ export const getPacks = async ({ atomic_url, chain_url, collection, account }) =
                 display_data: display_data ? JSON.parse(display_data) : null,
                 unlock_time,
                 use_count,
+                asset_ids: [],
+                name: null,
+                image: null,
+                video: null,
+                template_mint: null,
             };
 
             templateIds.push(pack_template_id);
@@ -64,19 +70,28 @@ export const getPacks = async ({ atomic_url, chain_url, collection, account }) =
 
     if (dataTemplates) {
         for (let i = 0; i < dataTemplates.data.length; i++) {
-            const { template } = dataTemplates.data[i];
+            const { template, asset_id } = dataTemplates.data[i];
 
             if (template?.template_id && tableData[template.template_id]) {
-                console.log(dataTemplates.data[i]);
+                const asset = useAssetData(dataTemplates.data[i]);
+                const { img, name, video } = asset;
 
-                tableData[template.template_id] = {
-                    ...tableData[template.template_id],
-                };
+                tableData[template.template_id].asset_ids.push(asset_id);
+                tableData[template.template_id].name = name;
+                tableData[template.template_id].image = img ? useImageUrl(img as string) : null;
+                tableData[template.template_id].video = video ? useImageUrl(video as string) : null;
+                tableData[template.template_id].template_mint = template.template_mint;
             }
         }
 
-        console.log(tableData);
+        const keys = Object.keys(tableData);
+
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+
+            if (tableData[keys[i]].asset_ids.length > 0) result.push(tableData[key]);
+        }
     }
 
-    return null;
+    return result;
 };
