@@ -43,11 +43,11 @@ export const getPacks = async ({ atomic_url, chain_url, collection, account }) =
                 display_data: display_data ? JSON.parse(display_data) : null,
                 unlock_time,
                 use_count,
-                asset_ids: [],
+                assets: [],
                 name: null,
                 image: null,
                 video: null,
-                template_mint: null,
+                shadow: null,
             };
 
             templateIds.push(pack_template_id);
@@ -75,12 +75,13 @@ export const getPacks = async ({ atomic_url, chain_url, collection, account }) =
             if (template?.template_id && tableData[template.template_id]) {
                 const asset = useAssetData(dataTemplates.data[i]);
                 const { img, name, video } = asset;
+                const shadow = video ? useImageUrl(video as string, 10, true) : img ? useImageUrl(img as string, 10, true) : null;
 
-                tableData[template.template_id].asset_ids.push(asset_id);
+                tableData[template.template_id].assets.push({asset_id, template_mint: template.template_mint});
                 tableData[template.template_id].name = name;
                 tableData[template.template_id].image = img ? useImageUrl(img as string) : null;
                 tableData[template.template_id].video = video ? useImageUrl(video as string) : null;
-                tableData[template.template_id].template_mint = template.template_mint;
+                tableData[template.template_id].shadow = shadow;
             }
         }
 
@@ -89,7 +90,7 @@ export const getPacks = async ({ atomic_url, chain_url, collection, account }) =
         for (let i = 0; i < keys.length; i++) {
             const key = keys[i];
 
-            if (tableData[keys[i]].asset_ids.length > 0) result.push(tableData[key]);
+            if (tableData[keys[i]].assets.length > 0) result.push(tableData[key]);
         }
     }
 

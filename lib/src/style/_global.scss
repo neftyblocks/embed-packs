@@ -12,27 +12,24 @@
     --nb-card-size-min: var(--nefty-card-size-min, 200px);
     --nb-card-size-max-m: var(--nefty-card-size-max-mobile, 1fr);
     --nb-card-size-max: var(--nefty-card-size-max, 1fr);
+
     --nb-gap: var(--nefty-gap, 24px);
     --nb-radius: var(--nefty-radius, 12px);
 
     --nb-border: var(--nefty-border, #353945);
-    --nb-border-card: var(--nefty-border-card, #424652);
+    --nb-border-card: var(--nefty-border-card, #23262f);
     --nb-border-size: var(--nefty-border-size, 1px);
-    --nb-bg: var(--nefty-bg, #1a1a1a);
 
     --nb-shadow: var(--nefty-shadow, rgba(0, 0, 0, 0.5));
+
+    --nb-bg: var(--nefty-bg, #1a1a1a);
+    --nb-bg-card: var(--nefty-bg-card, #313131);
 
     --nb-color: var(--nefty-color, #fcfcfd);
     --nb-color-secondary: var(--nefty-color-secondary, #777e90);
     --nb-color-highlight: var(--nefty-color-highlight, #00ffff);
 
     --nb-highlight: var(--nefty-highlight, #4050b5);
-
-    --nb-rarity-common: var(--nefty-rarity-common, #353945);
-    --nb-rarity-uncommon: var(--nefty-rarity-uncommon, #4caf50);
-    --nb-rarity-rare: var(--nefty-rarity-rare, #4050b5);
-    --nb-rarity-epic: var(--nefty-rarity-epic, #9c27b0);
-    --nb-rarity-legendary: var(--nefty-rarity-legendary, #ffd500);
 
     color: var(--nb-color);
 }

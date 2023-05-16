@@ -6,6 +6,7 @@
 
     // COMPONENTS
     import './components/Packs.svelte';
+    import './components/Pack.svelte';
     // GLOBALS
 
     // STATES
@@ -21,6 +22,7 @@
                 account: null,
                 config: null,
                 transactionId: null,
+                pack: null,
             };
 
             account = null;
@@ -60,5 +62,9 @@
 </script>
 
 <main>
-    <nefty-packs-group />
+    {#if $settings.pack}
+        <nefty-packs-item />
+    {:else}
+        <nefty-packs-group />
+    {/if}
 </main>

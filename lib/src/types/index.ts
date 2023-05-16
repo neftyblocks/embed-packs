@@ -17,6 +17,7 @@ export interface Settings {
         };
     };
     transactionId?: string;
+    pack: null | any;
 }
 
 export interface Payload {
